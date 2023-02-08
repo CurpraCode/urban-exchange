@@ -1,0 +1,217 @@
+body {
+  background-color: #f4f0ec;
+}
+
+.layout {
+  display: flex;
+}
+
+.site-page-header {
+  /* height: 234px; */
+  background: #ffffff !important;
+  box-shadow: 0px 8px 16px rgba(17, 17, 17, 0.06) !important;
+  padding-top: 1.5% !important;
+  padding-left: 10% !important;
+  padding-right: 10% !important;
+  padding-bottom: 1.5% !important;
+}
+
+.page-header-title {
+  /* width: 112px; */
+  height: 37px !important;
+  left: 222px !important;
+  top: 60px !important;
+  font-family: "Red Hat Display" !important;
+  font-style: normal !important;
+  font-weight: 700 !important;
+  font-size: 24px !important;
+  line-height: 152.2% !important;
+  /* identical to box height, or 37px */
+  color: #000000 !important;
+}
+
+.form-container {
+  padding-top: 1.5% !important;
+}
+
+.crypto-section {
+  display: flex !important;
+  flex-direction: row !important;
+  justify-content: flex-start !important;
+  padding: 0px !important;
+  gap: 16px !important;
+}
+
+.fiat-section {
+  display: flex !important;
+  flex-direction: row !important;
+  align-content: space-between !important;
+  padding: 0px !important;
+  gap: 16px !important;
+}
+
+.save-button {
+  background-color: #49cd5e !important;
+  color: #ffffff !important;
+  border-radius: 8px !important;
+  padding: 12px, 24px, 12px, 24px !important;
+  width: 100% !important;
+  height: 40px !important;
+}
+
+.filter-button {
+  border-radius: 8px !important;
+  padding: 12px, 24px, 12px, 24px !important;
+  width: 100% !important;
+  height: 40px !important;
+  display: flex !important;
+  flex-direction: row !important;
+  justify-content: center !important;
+  align-items: center !important;
+  padding: 12px 24px !important;
+  gap: 10px !important;
+  width: 78px !important;
+  height: 40px !important;
+  /* Primary/Primary */
+  border: 1px solid #1b31a8 !important;
+  border-radius: 8px !important;
+}
+
+.filter-button:hover {
+  background-color: #6581a3 !important;
+  border: 0px !important;
+  color: whitesmoke !important;
+}
+
+.coin-selector,
+.fiat-selector {
+  width: 100% !important;
+  height: 42px !important;
+  border-radius: 20px !important;
+  border-color: #e0e0e0 !important;
+  border-color: #e0e0e0 !important;
+}
+
+.crypto-input,
+.fiat-input {
+  /* Forms */
+  width: 100% !important;
+  height: 42px !important;
+  border-radius: 8px !important;
+  /* Inside auto layout */
+  flex: none !important;
+  order: 1 !important;
+  flex-grow: 0 !important;
+  border-color: #e0e0e0 !important;
+}
+
+.input-label {
+  font-family: "Red Hat Display" !important;
+  font-style: normal !important;
+  font-weight: 400 !important;
+  font-size: 14px !important;
+  line-height: 152.2% !important;
+  /* or 21px */
+  /* Neutral 3 (muted) */
+  color: #9c9c9c !important;
+}
+
+.coin-icon {
+  margin: 4px 8px !important;
+}
+
+.currency-name {
+  top: calc(50% - 21px / 2 + 13px) !important;
+  font-family: "Red Hat Display";
+  font-style: normal !important;
+  font-weight: 400 !important;
+  font-size: 14px !important;
+  line-height: 152.2% !important;
+  /* or 21px */
+  /* Primary */
+  color: #000000 !important;
+}
+
+.my-select-container .ant-select .ant-select-selector {
+  border-radius: 8px !important;
+}
+
+.filter-header {
+  margin-top: 1% !important;
+  padding-top: 1% !important;
+  padding-left: 10% !important;
+  padding-right: 10% !important;
+  padding-bottom: 1% !important;
+  background: #ffffff !important;
+  /* background-color: #F4F0EC; */
+}
+
+.feedback-header {
+  margin-top: 0.2% !important;
+  padding-top: 0.5% !important;
+  padding-left: 10% !important;
+  padding-right: 10% !important;
+  padding-bottom: 1% !important;
+  background: #f4f0ec !important;
+}
+
+.feedback-message {
+  text-align: center !important;
+  color: #ffffff !important;
+  background-color: #49cd5e !important;
+}
+
+.feedback-content {
+  padding: 8px !important;
+  font-family: "Red Hat Display";
+  font-style: normal !important;
+  font-weight: 700 !important;
+  font-size: 16px !important;
+  line-height: 21px !important;
+  text-align: center !important;
+  color: #ffffff !important;
+}
+
+.table-header {
+  padding-top: 0.5% !important;
+  padding-left: 10% !important;
+  padding-right: 10% !important;
+  padding-bottom: 2.5% !important;
+  background: #ffffff !important;
+}
+
+.table-row-light {
+  background-color: #ffffff !important;
+}
+
+.table-row-dark {
+  background-color: #eeeeee !important;
+}
+
+.ant-pagination-item-active a {
+  background-color: #000000 !important;
+  color: #ffffff !important;
+  border-radius: 4px !important;
+  border: none !important;
+  border-color: #000000 !important;
+}
+
+.ant-pagination-item-active {
+  background-color: #000000 !important;
+  color: white !important;
+  border-radius: 4px !important;
+  border: none !important;
+}
+
+.ant-table-row .table-row-dark:active {
+  border: 1px solid black !important;
+}
+
+.table-row-click-style {
+  border: 1px solid black !important;
+}
+
+.ant-table-row:active {
+  border: 4px solid black !important;
+  background-color: #49cd5e !important;
+}
