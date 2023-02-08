@@ -1,27 +1,22 @@
 // coin.controller.ts
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Post, Body } from '@nestjs/common';
 // import { Server, Socket } from 'socket.io';
 import { CoinService } from './coin.service';
+import { ExchangeDto } from './dto/exchange';
 
 @Controller('coin')
 export class CoinController {
   constructor(private readonly coinService: CoinService) {}
 
-  // onModuleInit() {
-  // setInterval(async () => {
-  //   try {
-  //     const rates = await this.coinService.fetchRates();
-  //     // this.server.emit('rates', rates);
-  //   } catch (error) {
-  //     throw new WsException(error);
-  //   }
-  // }, 60000);
-  // }
-
+  @Post('exchange')
+  async exchangeCoin(@Body() data: ExchangeDto) {
+    return await this.coinService.exchangeCoin(data);
+  }
   @Get()
   async getRates() {
-    return await this.coinService.getRates();
+    return await this.coinService.fetchRates();
   }
+
   @Get('test')
   getTest() {
     this.coinService.testSock();

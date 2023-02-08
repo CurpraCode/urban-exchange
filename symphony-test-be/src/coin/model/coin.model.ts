@@ -1,31 +1,27 @@
-// coin.schema.ts
-import * as mongoose from 'mongoose';
+import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import { Document } from 'mongoose';
 
-export const CoinSchema = new mongoose.Schema({
-  currencyFrom: {
-    type: String,
-    required: true,
-  },
-  currencyTo: {
-    type: String,
-    required: true,
-  },
-  currencyFromAmount: {
-    type: String,
-    required: true,
-  },
-  currencyToAmount: {
-    type: String,
-    required: true,
-  },
-  type: {
-    type: String,
-    enum: ['Live Price', 'Exchanged'],
-    index: true,
-  },
-  createdAt: {
-    type: Date,
-    default: Date.now(),
-    index: true,
-  },
-});
+export type CoinDocument = Coin & Document;
+
+@Schema()
+export class Coin {
+  @Prop()
+  currencyFrom: string;
+
+  @Prop()
+  currencyTo: string;
+
+  @Prop()
+  currencyFromAmount: string;
+
+  @Prop()
+  currencyToAmount: string;
+
+  @Prop()
+  type: string;
+
+  @Prop({ required: true })
+  createdAt: Date;
+}
+
+export const CoinSchema = SchemaFactory.createForClass(Coin);
