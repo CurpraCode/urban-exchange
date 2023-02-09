@@ -20,6 +20,9 @@ export class Coin {
   @Prop()
   type: string;
 
+  @Prop()
+  rate: string;
+
   @Prop({ required: true })
   createdAt: Date;
 }

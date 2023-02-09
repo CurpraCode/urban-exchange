@@ -2,12 +2,11 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { Coin } from './interface/coin.interface';
 import { Coin, CoinDocument } from './model/coin.model';
 import { Cron } from '@nestjs/schedule/dist';
 import { CoinGateway } from './coin.gateway';
 import { HttpService } from '@nestjs/axios';
-import { map } from 'rxjs';
+import { map, lastValueFrom } from 'rxjs';
 import { ExchangeDto } from './dto/exchange';
 
 @Injectable()
@@ -17,20 +16,31 @@ export class CoinService {
     // private server: CoinGateway,
     private readonly httpService: HttpService,
   ) {}
+@Cron(0 10 * * * *)
   async fetchRates() {
     try {
       const response = await this.httpService.get(
-        `${process.env.API_URL}/BTC/USD?apikey=${process.env.API_KEY}`,
+        `${process.env.API_URL}/BTC/?invert={invert}&apikey=${process.env.API_KEY}`,
       );
-      // const coins: [] = response.data;
-      // // for (const coin of coins) {
-      // //const existingCoin = await this.coinModel.find();
+      const coin = await lastValueFrom(response);
 
-      // const newCoin = new this.coinModel(coins);
-      // const data = await newCoin.save();
-
-      const data = await response.pipe(map((data) => data.data));
-      return data;
+      const ratesArray = coin.data.rates;
+      const data = ratesArray.map((item) => {
+        return {
+          currencyFrom: 'BTC',
+          currencyTo: item.asset_id_quote,
+          rate: item.rate,
+          createdAt: item.time,
+          type: 'live',
+        };
+      });
+      this.coinModel.create(data, (err)=>{
+        if (err){
+          throw new Error(err)
+        }
+      })
+  
+      return data
     } catch (error) {
       console.error(error);
     }
@@ -39,21 +49,26 @@ export class CoinService {
   async exchangeCoin(data: ExchangeDto) {
     try {
       const response = await this.httpService.get(
-        `${process.env.API_URL}/${data.currencyFrom}/${data.currencyTo} ?apikey=${process.env.API_KEY}`,
+        `${process.env.API_URL}/${data.currencyFrom}/${data.currencyTo}?apikey=${process.env.API_KEY}`,
       );
 
-      const coin = await response.pipe(map((data) => data.data));
-      const rate = data.currencyFromAmount * coin.rate,
-      const coinData : Record<string, unknown> = {
+      const coin = await lastValueFrom(response);
+
+      const rate: number = data.currencyFromAmount * coin.data.rate;
+      const coinData: Record<string, unknown> = {
         ...data,
-        currencyToAmount: rate
+        currencyToAmount: rate,
+        createdAt: coin.data.time,
+        type: 'exchange',
       };
       const exchange = new this.coinModel(coinData);
       const result = await exchange.save();
+      //this.server.server.emit('hi', result);
 
       return result;
     } catch (error) {
-      console.error(error);``
+      console.error(error);
+      ``;
     }
   }
 

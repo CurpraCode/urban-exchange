@@ -12,5 +12,5 @@ export class ExchangeDto {
 
   @ApiProperty()
   @IsNotEmpty()
-  currencyFromAmount: string;
+  currencyFromAmount: number;
 }
